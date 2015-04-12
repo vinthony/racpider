@@ -34,7 +34,8 @@ def fetch(path):
 	return _decorator		
 
 if __name__ == "__main__":
-	#如果 http://[u+].baidu.com
+
+	#fetch('get',http://[u+].baidu.com)
 	@fetch("www.baidu.com")
 	def test(body):
 		pass
