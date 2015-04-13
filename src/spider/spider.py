@@ -1,22 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import requests,functools
-from lxml import etree
-import io,sys
-# from utils import log
-def downloader(func_name,body):
-	with io.open(func_name+".rac",'w') as file:
-		file.write(body)
+import visiteder
 
-def getFuncName(func):
-	return str(func).split(" ")[1]
-def stardard_url(path):
-	if path.startswith("http://") or path.startswith("https://"):
-		print path
-		return path
-	else:
-		return "http://"+path
-		
+class Spider(object):
+	def __init__(self, seeds):
+		self.seeds = seeds # []
+		self.visiteder = visiteder.Visited()
+		for x in range(0,len(seeds)):
+			self.visiteder.addUnvisitedUrl(seeds[x])
+	def fetch(self,url_filter):
+		pass;
+
 def fetch(path):
 	def _decorator(func):
 		@functools.wraps(func)
@@ -35,7 +29,6 @@ def fetch(path):
 
 if __name__ == "__main__":
 
-	#fetch('get',http://[u+].baidu.com)
 	@fetch("www.baidu.com")
 	def test(body):
 		pass
