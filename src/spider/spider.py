@@ -10,15 +10,16 @@ sys.path.append("/Users/nantu/projects/racpider/src/")
 from coutils import log
 			
 class Spider(object):
-	def __init__(self, seeds,domain,name):
+	def __init__(self, seeds,name,re_filter=None):
 		self.seeds = seeds # []
 		self.visiteder = visiteder.Visited()
-		self.domain = domain
+		self.filter = re_filter
 		self.name = name
 		for x in range(0,len(seeds)):
 			self.visiteder.addUnvisitedUrl(seeds[x])
 
 	def fetch(self,url_filter=None):
+		rc = re.compile(self.filter)
 		while (not self.visiteder.isEmpty() and self.visiteder.getVisitedURLNum()<=1000):
 			visited = self.visiteder.unVisitedUrlDequeue()
 			if visited is None :
@@ -27,7 +28,7 @@ class Spider(object):
 				if url_filter(visited) is None:
 					continue
 			else:
-				if re.compile(r"http://www."+self.domain+".com").match(visited) is None:
+				if rc.match(visited) is None:
 					continue	
 						
 			d = Downloader(self.name,visited.split("/")[-1],visited)
@@ -38,5 +39,5 @@ class Spider(object):
 		log.info("all elements has been fetched",key="INFO")						
 
 if __name__ == "__main__":
-	s = Spider(['http://www.ifanr.com/'],"ifanr","ifanr");
+	s = Spider(['http://www.ifanr.com/'],"ifanr",r"http://www.ifanr.com");
 	s.fetch()

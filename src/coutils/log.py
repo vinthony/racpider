@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import time
-
+import io,os
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -26,6 +26,8 @@ def info(s,key='INFO'):
 def warning(s,key='WARNING'):		
 	if level_ == WARNING or level_ == 0:
 		print '[%s %s %s][%s %s %s]%s %s %s' % (bcolors.FAIL,key,bcolors.ENDC,bcolors.HEADER,time.strftime('%H:%M'),bcolors.ENDC,bcolors.FAIL,s,bcolors.ENDC)
+		with open("/Users/nantu/projects/racpider/error.log","a") as f:
+			f.write(time.strftime('[%y/%m/%d %H:%M] ')+s+os.linesep)
 
 def debug(s,key='DEBUG'):		
 	if level_ == DEBUG or level_ == 0:
