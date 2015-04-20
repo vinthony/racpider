@@ -13,14 +13,17 @@ class Downloader(object):
 		self.name = name
 		self.dir = dir
 	def get(self):
+		log.info(unquote(self.url),key="FETCH")
 		r = requests.get(self.url)
 		if r.status_code != NetworkStatus.OK:
-			log.WARNING(str(r.status_code)+":"+self.url)
+			log.warning("error:"+str(r.status_code)+":"+str(self.url))
 			# raise Exception("network connection failed")
 		self.save(self.name,r.text)	
 		return r.text
 
 	def save(self,name,body):
+		if body is None:
+			return
 		p = "/Users/nantu/projects/racpider/data/"+self.dir+"/"
 		if not os.path.exists(p):
 			os.makedirs(p)

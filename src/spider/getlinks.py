@@ -11,15 +11,24 @@ def html_filter(item):
 		return True
 	else:
 		return False	
-
+def sharp_mapper(item):
+	if item.find('#')>0:
+		return item.split('#')[0]
+	else:
+		return item		
 
 class getdoclinks(object):
 	def __init__(self, body):
-		self.soup = BeautifulSoup(body)
+		if body is not None:
+			self.soup = BeautifulSoup(body)
+		else:
+			self.soup = None	
 
 	def parse(self):
-		m = [links.get('href') for links in self.soup.find_all('a')]
-		a_links = filter(html_filter,m)
+		if self.soup is None:
+			return []
+		m = [ x.get('href') for x in self.soup.find_all('a')]
+		a_links = map(sharp_mapper,filter(html_filter,m))
 		frames = [fra.get('src') for fra in self.soup.find_all('frame')]
 		return a_links
 
