@@ -14,21 +14,21 @@ class bcolors:
 INFO = 1;
 WARNING = 2;
 DEBUG = 3;
-level_ = INFO;
-def logConfig(level=INFO):
+level_ = 0;
+def logConfig(level=0):
 	global level_
 	level_ =  level
 
 def info(s,key='INFO'):
-	if level_ == INFO:
+	if level_ == INFO or level_ == 0:
 		print '[%s %s %s][%s %s %s] %s' % (bcolors.OKBLUE,key,bcolors.ENDC,bcolors.HEADER,time.strftime('%H:%M'),bcolors.ENDC,s)
 
 def warning(s,key='WARNING'):		
-	if level_ == WARNING:
+	if level_ == WARNING or level_ == 0:
 		print '[%s %s %s][%s %s %s]%s %s %s' % (bcolors.FAIL,key,bcolors.ENDC,bcolors.HEADER,time.strftime('%H:%M'),bcolors.ENDC,bcolors.FAIL,s,bcolors.ENDC)
 
 def debug(s,key='DEBUG'):		
-	if level_ == DEBUG:
+	if level_ == DEBUG or level_ == 0:
 		print '[%s %s %s][%s %s %s] %s' % (bcolors.WARNING,key,bcolors.ENDC,bcolors.HEADER,time.strftime('%H:%M'),bcolors.ENDC,s)
 	
 if __name__ == '__main__':

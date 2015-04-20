@@ -19,3 +19,9 @@ care about the low level of database engine.
 * add some arguments to fetch data to a json file or xml file
 * have beautiful web client ,dragging to build returning api
 * using `racpider install` to update the necessary libraries which is defined in config  
+
+## todo
+
+* 增加分布式功能
+* 去重 将末尾的hash`#12121`去掉（分析两个页面是否一致/判断两个页面是否相同）
+* 
