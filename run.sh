@@ -1,2 +1,2 @@
 #!/bin/bash
-python ./src/spider/spider.py
+python ./src/spider/testClient.py

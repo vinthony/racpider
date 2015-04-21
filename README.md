@@ -28,12 +28,15 @@ care about the low level of database engine.
 
 ## todo
 - [x] 去掉url的hash
-- [ ] 增强filter功能
+- [x] 增强filter功能，修复match为search
 - [x] 将error信息放入error.log中
 - [ ] 增加分布式功能
 - [ ] 爬虫网页命名
 - [ ] 层次爬虫or页面爬虫
 - [ ] 优先级queue
 - [ ] 重新组织项目
-- [ ] 增加`racpider.json`来配置
+- [x] 增加`racpider.json`来配置
+- [ ] 增加默认racpider
 - [ ] 数据库配置
+- [ ] 获取超时
+- [ ] `[bug]`filename too long 

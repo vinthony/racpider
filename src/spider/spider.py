@@ -28,7 +28,7 @@ class Spider(object):
 				if url_filter(visited) is None:
 					continue
 			else:
-				if rc.match(visited) is None:
+				if rc.search(visited) is None:
 					continue	
 						
 			d = Downloader(self.name,visited.split("/")[-1],visited)
