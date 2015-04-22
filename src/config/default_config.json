@@ -1,18 +1,18 @@
 {
-	"seeds":["http://regexp.qq.com/"],
-	"regexp":"wechat.com",
-	"name":"wwwwwwws",
+	"seeds":["http://news.qq.com/"],
+	"regexp":"qq.com",
+	"name":"qq_news",
 	"db":{
-		
+
 	},
 	"auth":{
 		"username":"username",
 		"password":"password"
 	},
-	"cookies":[],
+	"cookies":["123"],
 	"stop":{
 		"time":"10s",
-		"level":"10",
+		"level":"5",
 		"pages":"1000"
 	}
 }

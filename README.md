@@ -26,6 +26,9 @@ care about the low level of database engine.
 * have beautiful web client ,dragging to build returning api
 * using `racpider install` to update the necessary libraries which is defined in config  
 
+## hence
+- [ ] `cil`程序
+
 ## todo
 - [x] 去掉url的hash
 - [x] 增强filter功能，修复match为search
@@ -39,4 +42,8 @@ care about the low level of database engine.
 - [ ] 增加默认racpider
 - [ ] 数据库配置
 - [ ] 获取超时
+- [ ] 配置顶层目录
+- [ ] `[bug]`racpider.json 无法输入正则
 - [ ] `[bug]`filename too long 
+- [ ] 多重结束条件，时间/层次/抓取的总任务数/指定任务页
+- [ ] 多线程

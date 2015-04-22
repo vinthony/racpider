@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 from spider import Spider
-import json
-
-with open("/Users/nantu/projects/racpider/Racpider.json",'r+') as f:
-	body  = f.read()
-	config = json.loads(body)
-	Spider(config['seeds'],config['name'],config['regexp']).fetch();
+import json,sys
+sys.path.append("/Users/nantu/projects/racpider/src/")
+from config import getconfig
+	
+config = getconfig.getconfig()
+Spider(config['seeds'],config['name'],config['regexp']).fetch();
