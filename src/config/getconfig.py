@@ -2,7 +2,7 @@
 
 import json,sys
 sys.path.append("/Users/nantu/projects/racpider/src/")
-from coutils import utils
+from utils import utils
 def getconfig():
 	dcfile = open("/Users/nantu/projects/racpider/src/config/default_config.json","r+")
 	default_config = json.loads(dcfile.read())

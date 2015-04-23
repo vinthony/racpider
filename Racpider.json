@@ -1,7 +1,7 @@
 {
-	"seeds":["http://regexp.qq.com/"],
-	"regexp":"wechat.com",
-	"name":"wwwwwwws",
+	"seeds":["http://news.qq.com"],
+	"regexp":"qq.com",
+	"name":"qq_news",
 	"db":{
 		
 	},
@@ -10,9 +10,9 @@
 		"password":"password"
 	},
 	"cookies":[],
+	"thread":"4",
 	"stop":{
-		"time":"10s",
-		"level":"10",
-		"pages":"1000"
+		"time":"0",
+		"pages":"190"
 	}
 }

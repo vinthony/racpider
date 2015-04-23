@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 import time
-import io,os
+import io,os,sys
+sys.path.append("/Users/nantu/projects/racpider/src/")
+from config import getconfig
+
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -32,7 +35,18 @@ def warning(s,key='WARNING'):
 def debug(s,key='DEBUG'):		
 	if level_ == DEBUG or level_ == 0:
 		print '[%s %s %s][%s %s %s] %s' % (bcolors.WARNING,key,bcolors.ENDC,bcolors.HEADER,time.strftime('%H:%M'),bcolors.ENDC,s)
-	
+def displayConfig():
+	config = getconfig.getconfig()
+	print '%s-------setting--------%s' % (bcolors.WARNING,bcolors.ENDC)
+	i = 0
+	for (key,value) in config.iteritems():
+		if i % 2 == 0:
+			print "%s%s\t\t%s\t%s" % (bcolors.OKBLUE,key,value,bcolors.ENDC)
+		else:
+			print "%s%s\t\t%s\t%s" % (bcolors.OKGREEN,key,value,bcolors.ENDC)
+		i = i+1	
+	print '%s-------end--------%s' % (bcolors.WARNING,bcolors.ENDC)	
+
 if __name__ == '__main__':
 	logConfig(level=INFO)
 	info('it is info')

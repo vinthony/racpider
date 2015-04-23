@@ -26,24 +26,33 @@ care about the low level of database engine.
 * have beautiful web client ,dragging to build returning api
 * using `racpider install` to update the necessary libraries which is defined in config  
 
-## hence
+## enhance
 - [ ] `cil`程序
 
+## delay
+
+- [ ] 带cookies的爬虫(增加auth)
+- [ ] 多重结束条件----层次
+
+
 ## todo
+
 - [x] 去掉url的hash
 - [x] 增强filter功能，修复match为search
 - [x] 将error信息放入error.log中
-- [ ] 增加分布式功能
-- [ ] 爬虫网页命名
-- [ ] 层次爬虫or页面爬虫
-- [ ] 优先级queue
-- [ ] 重新组织项目
 - [x] 增加`racpider.json`来配置
-- [ ] 增加默认racpider
-- [ ] 数据库配置
+- [x] 增加默认racpider
+- [x] 爬虫网页命名
+- [x] 多重结束条件，时间/层次
+- [ ] 增加分布式功能
+- [ ] 数据库Queue配置(redis)
 - [ ] 获取超时
-- [ ] 配置顶层目录
-- [ ] `[bug]`racpider.json 无法输入正则
-- [ ] `[bug]`filename too long 
-- [ ] 多重结束条件，时间/层次/抓取的总任务数/指定任务页
 - [ ] 多线程
+
+## bugs
+- [ ] racpider.json 无法输入正则
+- [ ] filename too long 
+
+## questions
+- [ ] 如何高效的存储抓下来的网页的名称?
+- [x] 分布式生成的html是存在当个集群的db下？如果不这样，返回整个html和正常的过程一致
