@@ -53,27 +53,25 @@ class Spider(object):
 
 	def notEmpty(self):
 		return not self.visiteder.isEmpty()# 未访问的队列不为空
-	def fetch_iter(self):
-		visited = self.visiteder.unVisitedUrlDequeue()
-		if visited is None :
-			continue
-		if url_filter:
-			if url_filter(visited) is None:
-				continue
-		else:
-			if rc.search(visited) is None:
-				continue	
-		d = Downloader(self.name,visited.split("/")[-1],visited)
-		self.visiteder.addVisitedUrl(visited)
-		links = getdoclinks(d.get()).parse()
-		for x in xrange(0,len(links)):
-			self.visiteder.addUnvisitedUrl(links[x])
 
 	def fetch(self,url_filter=None):
 		rc = re.compile(self.filter)
 		log.displayConfig()
-		while(self.loopCondition())
-			fetch_iter()
+		while(self.loopCondition()):
+			visited = self.visiteder.unVisitedUrlDequeue()
+			if visited is None :
+				continue
+			if url_filter:
+				if url_filter(visited) is None:
+					continue
+			else:
+				if rc.search(visited) is None:
+					continue	
+			d = Downloader(self.name,visited.split("/")[-1],visited)
+			self.visiteder.addVisitedUrl(visited)
+			links = getdoclinks(d.get()).parse()
+			for x in xrange(0,len(links)):
+				self.visiteder.addUnvisitedUrl(links[x])
 		log.info("all elements has been fetched",key="INFO")						
 
 if __name__ == "__main__":
