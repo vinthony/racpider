@@ -32,7 +32,7 @@ care about the low level of database engine.
 ## delay
 
 - [ ] 带cookies的爬虫(增加auth)
-- [ ] 多重结束条件----层次
+- [ ] 多重结束条件--层次
 
 
 ## todo
@@ -51,7 +51,7 @@ care about the low level of database engine.
 
 ## bugs
 - [ ] racpider.json 无法输入正则
-- [ ] filename too long 
+- [x] filename too long 
 
 ## questions
 - [ ] 如何高效的存储抓下来的网页的名称?
