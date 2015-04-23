@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding:utf-8 -*-
 from spider import Spider
 import json,sys
 sys.path.append("/Users/nantu/projects/racpider/src/")

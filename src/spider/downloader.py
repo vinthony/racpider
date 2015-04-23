@@ -27,9 +27,9 @@ class Downloader(object):
 		p = "/Users/nantu/projects/racpider/data/"+self.dir+"/"
 		if not os.path.exists(p):
 			os.makedirs(p)
-		if not name:
-			name = unquote(self.dir+str(time.time()))	
-		with io.open(p+"/"+unquote(name)+".rac",'w') as file:
+		if not name or len(name) > 100:
+			name = unquote(self.dir+str(time.time()))
+		with io.open(p+"/"+unquote(name).decode("utf-8")+".rac",'w') as file:
 			file.write(body)
 
 if __name__ == '__main__':

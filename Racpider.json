@@ -1,7 +1,7 @@
 {
-	"seeds":["http://news.qq.com"],
-	"regexp":"qq.com",
-	"name":"qq_news",
+	"seeds":["http://jandan.net"],
+	"regexp":"jandan.net",
+	"name":"jandan.net",
 	"db":{
 		
 	},
@@ -13,6 +13,6 @@
 	"thread":"4",
 	"stop":{
 		"time":"0",
-		"pages":"190"
+		"pages":"10000"
 	}
 }
