@@ -7,6 +7,7 @@ from urllib import unquote
 from status import NetworkStatus
 sys.path.append("/Users/nantu/projects/racpider/src/")
 from utils import log
+
 class Downloader(object):
 	def __init__(self,dir,name,url):
 		self.url = url

@@ -56,3 +56,15 @@ care about the low level of database engine.
 ## questions
 - [ ] 如何高效的存储抓下来的网页的名称?
 - [x] 分布式生成的html是存在当个集群的db下？如果不这样，返回整个html和正常的过程一致
+
+## Server
+- [ ] 配置redis 分配seed url 到slave
+- [ ] bloom filter 用来过滤已经fetch过得url
+- [ ] 分配url策略
+
+## slave
+- [ ] 从url接收job[连接redis]
+- [ ] 存储网页内容
+- [ ] url使用
+- [ ] `GET server/pull` 向服务器请求一个job
+- [ ] `GET server/push` 向服务器push一个结果
