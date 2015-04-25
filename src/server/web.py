@@ -64,8 +64,25 @@ class Request(object):
 					  
 	def header(self,header,default=None):
 		return self._get_headers().get(header.upper(),default)
-						   
+	def _get_cookies(self):
+		if not hasattr(self,"_cookies"):
+			cookies = {}
+			cookie_str = self._env.get('HTTP_COOKIE')
+			if cookie_str:
+				for c in cookie_str.split(';'):
+					pos = c.find('=')
+					if pos > 0:
+						cookies[c[:pos].strip()] = _unquote(c[pos+1:])					   
+			self._cookies = cookies
+		return self._cookies
+		
+	@property
+	def cookies(self):
+	    return dict(**self._get_cookies())
 
+	def cookie(self,name,default=None):
+		return self._get_cookies().get(name,default)    
+			
 	    
 	    
 	
@@ -77,3 +94,7 @@ class Request(object):
 class Response(object):
 	def __init__():
 		pass
+
+if __name__ == '__main__':
+	 r = Request({'REQUEST_METHOD':'POST', 'wsgi.input':StringIO('a=1&b=M%20M&c=ABC&c=XYZ&e=')})		
+	 print r
