@@ -63,8 +63,8 @@ care about the low level of database engine.
 - [ ] 分配url策略
 
 ## slave
-- [ ] 从url接收job[连接redis]
-- [ ] 存储网页内容
+- [x] 从url接收job
+- [x] 存储网页内容
 - [ ] url使用
 - [ ] `GET server/pull` 向服务器请求一个job
 - [ ] `GET server/push` 向服务器push一个结果
