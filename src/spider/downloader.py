@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+from __future__ import unicode_literals
 import requests
 import io,sys,os
 import time
 from urllib import unquote
 from status import NetworkStatus
 sys.path.append("/home/nantu/dev/racpider/src/slaver")
+sys.path.append("/Users/nantu/projects/racpider/src")
 from utils import log
 
 class Downloader(object):
@@ -25,13 +27,19 @@ class Downloader(object):
 	def save(self,name,body):
 		if body is None:
 			return
-		p = "/home/nantu/dev/racpider/data/"+self.dir+"/"
+		p = "/Users/nantu/projects/racpider/data/"+self.dir+"/"
 		if not os.path.exists(p):
 			os.makedirs(p)
 		if not name or len(name) > 100:
 			name = unquote(self.dir+str(time.time()))
-		with io.open(p+"/"+unquote(name).decode("utf-8")+".rac",'w') as file:
-			file.write(body)
+		try:
+			name = unquote(name).decode("utf-8")
+			
+		except Exception,e:
+			name = unquote(self.dir+str(time.time()))
+			
+		with io.open(p+"/"+name+".rac",'w') as file:
+				file.write(body)
 
 if __name__ == '__main__':
 	d = Downloader("test2","http://www.baidu.com")

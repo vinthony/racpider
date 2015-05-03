@@ -44,8 +44,8 @@ care about the low level of database engine.
 - [x] 增加默认racpider
 - [x] 爬虫网页命名
 - [x] 多重结束条件，时间/层次
-- [ ] 增加分布式功能
-- [ ] 数据库Queue配置(redis)
+- [x] 增加分布式功能
+- [x] 数据库Queue配置(redis)
 - [ ] 获取超时
 - [ ] 多线程
 
@@ -58,13 +58,14 @@ care about the low level of database engine.
 - [x] 分布式生成的html是存在当个集群的db下？如果不这样，返回整个html和正常的过程一致
 
 ## Server
-- [ ] 配置redis 分配seed url 到slave
-- [ ] bloom filter 用来过滤已经fetch过得url
+- [x] 配置redis 分配seed url 到slave
+- [x] bloom filter 用来过滤已经fetch过得url
 - [ ] 分配url策略
 
 ## slave
 - [x] 从url接收job
 - [x] 存储网页内容
-- [ ] url使用
-- [ ] `GET server/pull` 向服务器请求一个job
-- [ ] `GET server/push` 向服务器push一个结果
+- [x] url使用
+- [x] `GET server/pull` 向服务器请求一个job
+- [x] `GET server/push` 向服务器push一个结果
+- [ ] slaver超时处理 

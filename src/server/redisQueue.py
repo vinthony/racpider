@@ -1,9 +1,10 @@
 import redis
+import uuid
 #http://peter-hoffmann.com/2012/python-simple-queue-redis-queue.html
 class RedisQueue(object):
 	def __init__(self,name,**redis_kwargs):
 		self.db = redis.Redis(**redis_kwargs)
-		self.key = '%s:%s' % (name,"queue")
+		self.key = '%s:%s:' % (name,"queue")
 
 	def qsize(self):
 		return self.db.llen(self.key)
@@ -12,7 +13,7 @@ class RedisQueue(object):
 		return	self.qsize() == 0
 
 	def enqueue(self,item):
-		self.db.rpush(self.key,item)
+		self.db.rpush(self.key+str(uuid.uuid4()),item)
 
 	def dequeue(self,block=True,timeout=None):
 		if block:

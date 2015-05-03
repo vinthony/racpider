@@ -2,22 +2,26 @@
 import requests
 import sys
 sys.path.append("/home/nantu/dev/racpider/src")
+sys.path.append("/Users/nantu/projects/racpider/src")
 from spider.geturlsfromlink import getlinks 
 # config server ip:port
+url = "http://192.168.31.110:5237"
 def notempty():
-	e = requests.get("http://192.168.31.110:5237/empty")
-	if int(e.text) > 0 and r.status_code == 200:
+	e = requests.get(url+"/empty")
+	if e.status_code != 200:
+		return False
+	print e.text	
+	if int(e.text) > 0 :
 		return True
-	return False
+	return False	
 
 while notempty():
-	r = requests.get("http://192.168.31.110:5237/pull")
+	r = requests.get(url+"/pull")
 	if r.status_code != 200:
 		print "error"
 	links = getlinks(r.text)
-#print links
 	files = {'file':",".join(links)}
-	r2 = requests.post("http://192.168.31.110:5237/push",headers=files)
+	r2 = requests.get(url+"/push",headers=files)
 	if r2.status_code != 200:
 		break
 

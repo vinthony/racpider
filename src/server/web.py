@@ -722,7 +722,6 @@ class Request(object):
         raw = self._get_raw_input()
         for k, v in raw.iteritems():
             copy[k] = v[0] if isinstance(v, list) else v
-        print copy['identify']
         return copy
 
     def get_body(self):
@@ -1400,7 +1399,6 @@ class WSGIApplication(object):
         '''
         self._running = False
         self._document_root = document_root
-        print document_root
         self._interceptors = []
         self._template_engine = None
 

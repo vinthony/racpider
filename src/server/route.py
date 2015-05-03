@@ -1,31 +1,43 @@
 from web import get,post,ctx,interceptor,seeother,notfound,found,Dict
 from redisQueue import RedisQueue
+from bloomfilter import BloomFilter
+
 import sys
 sys.path.append("/Users/nantu/projects/racpider/src")
 from spider.geturlsfromlink import getlinks
 import time
+import re
 
+bf = BloomFilter()
+rq = RedisQueue("rac",host="localhost",port=6379,db=0)
+rc = re.compile("http://jandan.net")
+
+def legal(url):
+	return rc.match(url)
 @get('/')
 def index():
-	return 'hello,world'
+	return 'racpider'
 
 @get('/pull')
 def pull():
-	r = RedisQueue("rac",host="localhost",port=6379,db=0)
-	if not r.empty():
-		return r.dequeue()
+	rq = RedisQueue("rac",host="localhost",port=6379,db=0)
+	if not rq.empty():
+		u = rq.dequeue()
+		bf.add(u)
+		return u
 	else:
 		return seeother("404.html")	
 
-@post('/push')
+@get('/push')
 def push():
+	rq = RedisQueue("rac",host="localhost",port=6379,db=0)
 	urls = ctx.request.header('file').split(",")
-	r = RedisQueue("rac",host="localhost",port=6379,db=0)
-	# # cookie=urls???
 	for x in urls:
-		r.enqueue(x)
+		if not bf.contains(x) and legal(x):
+			rq.enqueue(x)
 	
 @get('/empty')
-def emp():
-	r = RedisQueue("rac",host="localhost",port=6379,db=0)
-	return r.qsize()
+def empty():
+	rq = RedisQueue("rac",host="localhost",port=6379,db=0)
+	print rq.dequeue()
+	return str(rq.qsize())
