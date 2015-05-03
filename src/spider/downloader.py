@@ -5,7 +5,7 @@ import io,sys,os
 import time
 from urllib import unquote
 from status import NetworkStatus
-sys.path.append("/Users/nantu/projects/racpider/src/")
+sys.path.append("/home/nantu/dev/racpider/src/slaver")
 from utils import log
 
 class Downloader(object):
@@ -25,7 +25,7 @@ class Downloader(object):
 	def save(self,name,body):
 		if body is None:
 			return
-		p = "/Users/nantu/projects/racpider/data/"+self.dir+"/"
+		p = "/home/nantu/dev/racpider/data/"+self.dir+"/"
 		if not os.path.exists(p):
 			os.makedirs(p)
 		if not name or len(name) > 100:
