@@ -6,11 +6,11 @@ sys.path.append("/Users/nantu/projects/racpider/src")
 from spider.geturlsfromlink import getlinks 
 # config server ip:port
 url = "http://192.168.31.110:5237"
+url = "http://10.170.48.53:5237"
 def notempty():
 	e = requests.get(url+"/empty")
 	if e.status_code != 200:
 		return False
-	print e.text	
 	if int(e.text) > 0 :
 		return True
 	return False	

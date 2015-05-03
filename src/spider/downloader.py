@@ -28,6 +28,10 @@ class Downloader(object):
 		if body is None:
 			return
 		p = "/Users/nantu/projects/racpider/data/"+self.dir+"/"
+	 	try:
+			os.isdir(p)
+		except Exception,e:
+			p = "/home/nantu/dev/racpider/data"+self.dir+"/"
 		if not os.path.exists(p):
 			os.makedirs(p)
 		if not name or len(name) > 100:
