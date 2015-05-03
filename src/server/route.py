@@ -1,7 +1,6 @@
 from web import get,post,ctx,interceptor,seeother,notfound,found,Dict
 from redisQueue import RedisQueue
 from bloomfilter import BloomFilter
-
 import sys
 sys.path.append("/Users/nantu/projects/racpider/src")
 from spider.geturlsfromlink import getlinks
@@ -9,7 +8,6 @@ import time
 import re
 
 bf = BloomFilter()
-rq = RedisQueue("rac",host="localhost",port=6379,db=0)
 rc = re.compile("http://jandan.net")
 
 def legal(url):
@@ -26,8 +24,12 @@ def pull():
 		bf.add(u)
 		return u
 	else:
-		return seeother("404.html")	
+		return seeother("/error")	
 
+@get('/error')
+def error():
+	return "error occur"
+	
 @get('/push')
 def push():
 	rq = RedisQueue("rac",host="localhost",port=6379,db=0)
@@ -39,5 +41,5 @@ def push():
 @get('/empty')
 def empty():
 	rq = RedisQueue("rac",host="localhost",port=6379,db=0)
-	print rq.dequeue()
+	print rq.empty()
 	return str(rq.qsize())

@@ -13,7 +13,7 @@ class RedisQueue(object):
 		return	self.qsize() == 0
 
 	def enqueue(self,item):
-		self.db.rpush(self.key+str(uuid.uuid4()),item)
+		self.db.rpush(self.key,item)
 
 	def dequeue(self,block=True,timeout=None):
 		if block:
