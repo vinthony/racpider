@@ -7,7 +7,7 @@ A simple, lightweight, WSGI-compatible web framework.
 
 __author__ = 'Michael Liao'
 
-import types, os, re, cgi, sys, time, datetime, functools, mimetypes, threading, colorlog, urllib, traceback
+import types, os, re, cgi, sys, time, datetime, functools, mimetypes, threading, urllib, traceback
 try:
     from cStringIO import StringIO
 except ImportError:
@@ -1242,12 +1242,12 @@ class Jinja2TemplateEngine(TemplateEngine):
 
 def _default_error_handler(e, start_response, is_debug):
     if isinstance(e, HttpError):
-        colorlog.info('HttpError: %s' % e.status)
+        #colorlog.info('HttpError: %s' % e.status)
         headers = e.headers[:]
         headers.append(('Content-Type', 'text/html'))
         start_response(e.status, headers)
         return ('<html><body><h1>%s</h1></body></html>' % e.status)
-    colorlog.exception('Exception:')
+    #colorlog.exception('Exception:')
     start_response('500 Internal Server Error', [('Content-Type', 'text/html'), _HEADER_X_POWERED_BY])
     if is_debug:
         return _debug()
@@ -1400,7 +1400,7 @@ class WSGIApplication(object):
         '''
         self._running = False
         self._document_root = document_root
-
+        print document_root
         self._interceptors = []
         self._template_engine = None
 
@@ -1426,7 +1426,7 @@ class WSGIApplication(object):
     def add_module(self, mod):
         self._check_not_running()
         m = mod if type(mod)==types.ModuleType else _load_module(mod)
-       # colorlog.info('Add module: %s' % m.__name__)
+       # #colorlog.info('Add module: %s' % m.__name__)
         for name in dir(m):
             fn = getattr(m, name)
             if callable(fn) and hasattr(fn, '__web_route__') and hasattr(fn, '__web_method__'):
@@ -1445,16 +1445,16 @@ class WSGIApplication(object):
                 self._get_dynamic.append(route)
             if route.method=='POST':
                 self._post_dynamic.append(route)
-        colorlog.info('[200]%s' % str(route))
+        #colorlog.info('[200]%s' % str(route))
 
     def add_interceptor(self, func):
         self._check_not_running()
         self._interceptors.append(func)
-        colorlog.info('Add interceptor: %s' % str(func))
+        #colorlog.info('Add interceptor: %s' % str(func))
 
     def run(self, port=9000, host='127.0.0.1'):
         from wsgiref.simple_server import make_server
-        colorlog.info('application (%s) will start at %s:%s...' % (self._document_root, host, port))
+        #colorlog.info('application (%s) will start at %s:%s...' % (self._document_root, host, port))
         server = make_server(host, port, self.get_wsgi_application(debug=True))
         server.serve_forever()
 
@@ -1513,7 +1513,7 @@ class WSGIApplication(object):
                 start_response(e.status, response.headers)
                 return ['<html><body><h1>', e.status, '</h1></body></html>']
             except Exception, e:
-                colorlog.info(e)
+                #colorlog.info(e)
                 if not debug:
                     start_response('500 Internal Server Error', [])
                     return ['<html><body><h1>500 Internal Server Error</h1></body></html>']
