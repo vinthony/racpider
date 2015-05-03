@@ -9,7 +9,6 @@ import time
 def index():
 	return 'hello,world'
 
-## uuid pull的时候使用uuid来确保没有缓存
 @get('/pull')
 def pull():
 	r = RedisQueue("rac",host="localhost",port=6379,db=0)
@@ -18,11 +17,15 @@ def pull():
 	else:
 		return seeother("404.html")	
 
-@get('/push/:time')
-def push(time):
-	urls = ctx.request.cookie("urls").split(',')
+@post('/push')
+def push():
+	urls = ctx.request.header('file').split(",")
 	r = RedisQueue("rac",host="localhost",port=6379,db=0)
-	# cookie=urls???
+	# # cookie=urls???
 	for x in urls:
 		r.enqueue(x)
 	
+@get('/empty')
+def emp():
+	r = RedisQueue("rac",host="localhost",port=6379,db=0)
+	return r.qsize()
