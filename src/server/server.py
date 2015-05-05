@@ -8,8 +8,10 @@ from redisQueue import RedisQueue
 
 r = RedisQueue("rac",host="localhost",port=6379,db=0)
 
-r.enqueue("http://www.jandan.net")
-
+if r.empty():
+	r.enqueue("http://www.jandan.net")
+	
+print "init redis"
 
 wsgi = WSGIApplication(os.path.dirname(os.path.abspath(__file__)))
 wsgi.add_module(route)

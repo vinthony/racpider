@@ -9,16 +9,18 @@ import re
 
 bf = BloomFilter()
 rc = re.compile("http://jandan.net")
+rq = RedisQueue("rac",host="localhost",port=6379,db=0)
 
 def legal(url):
 	return rc.match(url)
+
 @get('/')
 def index():
 	return 'racpider'
 
 @get('/pull')
 def pull():
-	rq = RedisQueue("rac",host="localhost",port=6379,db=0)
+	#rq = RedisQueue("rac",host="localhost",port=6379,db=0)
 	if not rq.empty():
 		u = rq.dequeue()
 		bf.add(u)
@@ -32,14 +34,17 @@ def error():
 	
 @get('/push')
 def push():
-	rq = RedisQueue("rac",host="localhost",port=6379,db=0)
+	#rq = RedisQueue("rac",host="localhost",port=6379,db=0)
 	urls = ctx.request.header('file').split(",")
 	for x in urls:
-		if not bf.contains(x) and legal(x):
-			rq.enqueue(x)
+		if legal(x):
+			if not bf.contains(x):
+				rq.enqueue(x)
+				bf.add(x)
+			else:
+				print "chong fu"	
 	
 @get('/empty')
 def empty():
-	rq = RedisQueue("rac",host="localhost",port=6379,db=0)
-	print rq.empty()
+	#rq = RedisQueue("rac",host="localhost",port=6379,db=0)
 	return str(rq.qsize())

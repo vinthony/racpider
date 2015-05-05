@@ -20,7 +20,6 @@ class RedisQueue(object):
 			item = self.db.blpop(self.key,timeout=timeout)
 		else:
 			item = self.db.lpop(self.key)
-
 		if item:
 			item = item[1]
 
