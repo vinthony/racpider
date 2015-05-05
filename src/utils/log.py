@@ -31,6 +31,8 @@ def warning(s,key='WARNING'):
 		print '[%s %s %s][%s %s %s]%s %s %s' % (bcolors.FAIL,key,bcolors.ENDC,bcolors.HEADER,time.strftime('%H:%M'),bcolors.ENDC,bcolors.FAIL,s,bcolors.ENDC)
 		with open("/Users/nantu/projects/racpider/error.log","a") as f:
 			f.write(time.strftime('[%y/%m/%d %H:%M] ')+s+os.linesep)
+def color(s):
+	print '%s %s %s' % (bcolors.OKGREEN,s,bcolors.ENDC)
 
 def debug(s,key='DEBUG'):		
 	if level_ == DEBUG or level_ == 0:

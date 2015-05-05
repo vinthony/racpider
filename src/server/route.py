@@ -1,7 +1,7 @@
 from web import get,post,ctx,interceptor,seeother,notfound,found,Dict
 from redisQueue import RedisQueue
 from bloomfilter import BloomFilter
-import sys
+import sys,os
 sys.path.append("/Users/nantu/projects/racpider/src")
 from spider.geturlsfromlink import getlinks
 import time
@@ -10,6 +10,7 @@ import re
 bf = BloomFilter()
 rc = re.compile("http://jandan.net")
 rq = RedisQueue("rac",host="localhost",port=6379,db=0)
+
 
 def legal(url):
 	return rc.match(url)
