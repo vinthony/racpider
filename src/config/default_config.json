@@ -2,8 +2,15 @@
 	"seeds":["http://news.qq.com/"],
 	"regexp":"qq.com",
 	"name":"qq_news",
-	"db":{
-
+	"redis":{
+		"host":"127.0.0.1",
+		"port":"6379",
+		"db":"0"
+	},
+	"server":{
+		"host":"127.0.0.1",
+		"port":"5237",
+		"debug":"False"
 	},
 	"auth":{
 		"username":"username",

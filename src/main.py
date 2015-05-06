@@ -38,7 +38,7 @@ def restart_process():
 
 def start_watch(path,callback):
 	observer = Observer()		
-	path = os.path.join(path)
+	path = os.path.join(path,"src/server")
 	observer.schedule(MyFileSystemEventHandler(restart_process),path, recursive=True)	
 	observer.start()
 	log.info('Watching directory %s ' % path)

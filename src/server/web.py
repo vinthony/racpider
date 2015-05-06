@@ -1450,10 +1450,19 @@ class WSGIApplication(object):
         self._interceptors.append(func)
         #colorlog.info('Add interceptor: %s' % str(func))
 
-    def run(self, port=9000, host='127.0.0.1'):
+    def run(self, config):
         from wsgiref.simple_server import make_server
+        if not config:
+            host = "127.0.0.1"
+            port = 5237
+            debug = True
+        else:
+            host = config["host"]
+            port = int(config["port"])
+            debug = False
+
         #colorlog.info('application (%s) will start at %s:%s...' % (self._document_root, host, port))
-        server = make_server(host, port, self.get_wsgi_application(debug=True))
+        server = make_server(host, port, self.get_wsgi_application(debug=False))
         server.serve_forever()
 
     def get_wsgi_application(self, debug=False):

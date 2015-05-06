@@ -1,19 +1,23 @@
 from web import get,post,ctx,interceptor,seeother,notfound,found,Dict
 from redisQueue import RedisQueue
 from bloomfilter import BloomFilter
+from redis import Redis
 import sys,os
-sys.path.append("/Users/nantu/projects/racpider/src")
-from spider.geturlsfromlink import getlinks
+from config.getconfig import getconfig
+from utils import log
+from urllib import unquote
 import time
 import re
-
+config = getconfig()
 bf = BloomFilter()
-rc = re.compile("http://jandan.net")
-rq = RedisQueue("rac",host="localhost",port=6379,db=0)
+rc = re.compile(config['regexp'])
+rec = config['redis']
+redis_conn = Redis(host=rec["host"],port=int(rec["port"]),db=int(rec['db']))
+rq = RedisQueue(config['name'],redis_conn)
 
 
 def legal(url):
-	return rc.match(url)
+	return rc.search(url)
 
 @get('/')
 def index():
@@ -21,10 +25,10 @@ def index():
 
 @get('/pull')
 def pull():
-	#rq = RedisQueue("rac",host="localhost",port=6379,db=0)
 	if not rq.empty():
 		u = rq.dequeue()
 		bf.add(u)
+		log.info(unquote(u),key="FETCH")
 		return u
 	else:
 		return seeother("/error")	
@@ -35,7 +39,6 @@ def error():
 	
 @get('/push')
 def push():
-	#rq = RedisQueue("rac",host="localhost",port=6379,db=0)
 	urls = ctx.request.header('file').split(",")
 	for x in urls:
 		if legal(x):
@@ -43,9 +46,13 @@ def push():
 				rq.enqueue(x)
 				bf.add(x)
 			else:
-				print "chong fu"	
+				pass
+				# print "in bf"
+		else:
+			pass
+			# print "inlegal"			
+
 	
 @get('/empty')
 def empty():
-	#rq = RedisQueue("rac",host="localhost",port=6379,db=0)
 	return str(rq.qsize())

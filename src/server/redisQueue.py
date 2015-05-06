@@ -1,9 +1,8 @@
-import redis
 import uuid
 #http://peter-hoffmann.com/2012/python-simple-queue-redis-queue.html
 class RedisQueue(object):
-	def __init__(self,name,**redis_kwargs):
-		self.db = redis.Redis(**redis_kwargs)
+	def __init__(self,name,redis_conn):
+		self.db = redis_conn
 		self.key = '%s:%s:' % (name,"queue")
 
 	def qsize(self):

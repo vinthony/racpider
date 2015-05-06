@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 import requests
-import sys
-sys.path.append("/home/nantu/dev/racpider/src")
-sys.path.append("/Users/nantu/projects/racpider/src")
+import sys,time
 from spider.geturlsfromlink import getlinks 
-# config server ip:port
-url = "http://192.168.31.110:5237"
-url = "http://10.170.48.53:5237"
+from config.getconfig import getconfig
+STATUS_OK = 200
+config = getconfig()
+url = "http://"+config["server"]["host"]+":"+config["server"]["port"]
+
 def notempty():
 	e = requests.get(url+"/empty")
-	if e.status_code != 200:
+	if e.status_code != STATUS_OK:
 		return False
 	if int(e.text) > 0 :
 		return True
@@ -17,11 +17,11 @@ def notempty():
 
 while notempty():
 	r = requests.get(url+"/pull")
-	if r.status_code != 200:
+	if r.status_code != STATUS_OK:
 		print "error"
 	links = getlinks(r.text)
 	files = {'file':",".join(links)}
 	r2 = requests.get(url+"/push",headers=files)
-	if r2.status_code != 200:
+	if r2.status_code != STATUS_OK:
 		break
 

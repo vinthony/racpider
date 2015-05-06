@@ -1,9 +1,9 @@
 #!/usr/bin/env python
-
+from redis import Redis
 import json,sys,os
 
 def mergejson(base,addition):
-	re = dict()
+	re = base
 	for (key,value) in addition.iteritems():
 		if type(value) == type({}):#dict
 			re[key] = mergejson(base[key],value)

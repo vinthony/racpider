@@ -2,9 +2,6 @@
 	"seeds":["http://jandan.net"],
 	"regexp":"jandan.net",
 	"name":"jandan.net",
-	"db":{
-		
-	},
 	"auth":{
 		"username":"username",
 		"password":"password"
