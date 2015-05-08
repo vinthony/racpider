@@ -7,6 +7,10 @@
 		"port":"6379",
 		"db":"0"
 	},
+	"mongodb":{
+		"host":"127.0.0.1",
+		"port":"27017"
+		},
 	"server":{
 		"host":"127.0.0.1",
 		"port":"5237",
@@ -16,6 +20,8 @@
 		"username":"username",
 		"password":"password"
 	},
+	"timeout":"2",
+	"sleep":"1",
 	"cookies":["123"],
 	"stop":{
 		

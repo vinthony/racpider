@@ -7,6 +7,9 @@ import time
 from urllib import unquote
 from status import NetworkStatus
 from utils import log
+from config.getconfig import getconfig
+
+config = getconfig()
 
 class Downloader(object):
 	def __init__(self,dir,name,url):
@@ -14,14 +17,17 @@ class Downloader(object):
 		self.name = name
 		self.dir = dir
 	def get(self):
-		r = requests.get(self.url)
-		if r.status_code != NetworkStatus.OK:
-			log.warning("error:"+str(r.status_code)+":"+str(self.url))
-		log.info(self.url,key="FETCH")
-		if self.save(self.name,r.text):
-			return r.text
-		else:
-			return "404"	
+		try:
+			r = requests.get(self.url,timeout=int(config["timeout"]))
+			if r.status_code != NetworkStatus.OK:
+				log.warning("error:"+str(r.status_code)+":"+str(self.url))
+			log.info(self.url,key="FETCH")
+			if self.save(self.name,r.text):
+				return r.text
+			else:
+				return "404"
+		except requests.exceptions.Timeout:
+			return "444"						
 
 	def save(self,name,body):
 		if body is None:

@@ -16,6 +16,9 @@ def notempty():
 	return False	
 
 while notempty():
+	if int(config["sleep"]) > 0:
+		time.sleep(int(config["sleep"]))
+		
 	r = requests.get(url+"/pull")
 	if r.status_code != STATUS_OK:
 		print "error"
