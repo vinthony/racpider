@@ -59,4 +59,4 @@ target/
 *.rac
 .idea/
 data/
-src/venv/
+venv/
