@@ -1,0 +1,10 @@
+#!/Users/nantu/projects/racpider/src/venv/bin/python
+# EASY-INSTALL-ENTRY-SCRIPT: 'racpider==0.1','console_scripts','racpider'
+__requires__ = 'racpider==0.1'
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.exit(
+        load_entry_point('racpider==0.1', 'console_scripts', 'racpider')()
+    )

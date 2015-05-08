@@ -15,7 +15,7 @@ class MyFileSystemEventHandler(FileSystemEventHandler):
 			log.info('Python source file changed:%s' % event.src_path)
 			self.restart()
 
-command = ['echo','ok']
+command = ['python','./src/server.py']
 process = None
 
 def kill_process():
@@ -50,12 +50,6 @@ def start_watch(path,callback):
 		observer.stop()
 	observer.join()	
 
-if __name__ == '__main__':
-	argv = sys.argv[1:]
-	if not argv:
-		log.info('Usage:./pymonitor your-script.py') 
-	if argv[0] !='python':
-		argv.insert(0,'python')
-	command = argv
+def pymonitor():
 	path = os.path.abspath('.')
 	start_watch(path,None)	

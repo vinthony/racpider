@@ -1,21 +1,22 @@
 #!/usr/bin/env python
-
+from __future__ import unicode_literals
 from bs4 import BeautifulSoup
 import re
 _REP_IS_FORMAT_URL = "http"
 
 def html_filter(item):
-	if type(item)!= type("str"):
+	if type(item)!= type(u"unicode"):
 		return False
 	if item.startswith("http"):
 		return True
 	else:
-		return False	
+		return False
+
 def sharp_mapper(item):
 	if item.find('#')>0:
-		return item.split('#')[0]
+		return item.split('#')[0].encode('utf-8')
 	else:
-		return item		
+		return item.encode('utf-8')
 
 class getdoclinks(object):
 	def __init__(self, body):

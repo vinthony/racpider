@@ -32,8 +32,7 @@ care about the low level of database engine.
 ## delay
 
 - [ ] 带cookies的爬虫(增加auth)
-- [ ] 多重结束条件--层次
-
+- [ ] 多线程（delay 利用web服务器来进行分布式，故delay）
 
 ## todo
 
@@ -48,10 +47,9 @@ care about the low level of database engine.
 - [x] 数据库Queue配置(redis)
 - [x] mongodb 来存储内容
 - [ ] 获取超时
-- [ ] 多线程
 
 ## bugs
-- [ ] racpider.json 无法输入正则
+- [ ] racpider.json 无法输入正则 ？ 使用 py文件来代替具体配置到项目的内容
 - [x] filename too long 
 
 ## questions
@@ -71,3 +69,10 @@ care about the low level of database engine.
 - [x] `GET server/push` 向服务器push一个结果
 - [ ] slaver超时处理 
 
+## changelog
+
+#### 5月9日
+
+- 增加cli入口
+- fixed download为unicode类型导致无法getlink的问题
+- 增加mongodb支持存入数据

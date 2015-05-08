@@ -15,16 +15,17 @@ def notempty():
 		return True
 	return False	
 
-while notempty():
-	if int(config["sleep"]) > 0:
-		time.sleep(int(config["sleep"]))
-		
-	r = requests.get(url+"/pull")
-	if r.status_code != STATUS_OK:
-		print "error"
-	links = getlinks(r.text)
-	files = {'file':",".join(links)}
-	r2 = requests.get(url+"/push",headers=files)
-	if r2.status_code != STATUS_OK:
-		break
+def slaver_client():
+	while notempty():
+		if int(config["sleep"]) > 0:
+			time.sleep(int(config["sleep"]))
+			
+		r = requests.get(url+"/pull")
+		if r.status_code != STATUS_OK:
+			print "error"
+		links = getlinks(r.text)
+		files = {'file':",".join(links)}
+		r2 = requests.get(url+"/push",headers=files)
+		if r2.status_code != STATUS_OK:
+			break
 
