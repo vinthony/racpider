@@ -46,6 +46,7 @@ care about the low level of database engine.
 - [x] 多重结束条件，时间/层次
 - [x] 增加分布式功能
 - [x] 数据库Queue配置(redis)
+- [x] mongodb 来存储内容
 - [ ] 获取超时
 - [ ] 多线程
 
@@ -54,7 +55,7 @@ care about the low level of database engine.
 - [x] filename too long 
 
 ## questions
-- [ ] 如何高效的存储抓下来的网页的名称?
+- [x] 如何高效的存储抓下来的网页的名称? 【使用mongodb存储】
 - [x] 分布式生成的html是存在当个集群的db下？如果不这样，返回整个html和正常的过程一致
 
 ## Server

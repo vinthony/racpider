@@ -8,7 +8,8 @@ from urllib import unquote
 from status import NetworkStatus
 from utils import log
 from config.getconfig import getconfig
-
+from mongoc import MongoC
+from models import HTMLModel
 config = getconfig()
 
 class Downloader(object):
@@ -22,14 +23,22 @@ class Downloader(object):
 			if r.status_code != NetworkStatus.OK:
 				log.warning("error:"+str(r.status_code)+":"+str(self.url))
 			log.info(self.url,key="FETCH")
-			if self.save(self.name,r.text):
+			if self.savedb(self.url,r.text):
 				return r.text
 			else:
 				return "404"
 		except requests.exceptions.Timeout:
 			return "444"						
 
-	def save(self,name,body):
+	def savedb(self,url,body):
+		try:
+			MongoC().insert(HTMLModel(body=body,url=url))
+		except Exception,e:
+			print e
+			return False	
+		return True
+
+	def savefile(self,name,body):
 		if body is None:
 			return
 		p = os.path.dirname(os.path.join(os.path.abspath("."),os.pardir))+"/data/"+self.dir+"/"

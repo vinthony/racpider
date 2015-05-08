@@ -1,7 +1,7 @@
 {
 	"seeds":["http://jandan.net"],
 	"regexp":"jandan.net",
-	"name":"jandan.net",
+	"name":"jandan",
 	"auth":{
 		"username":"username",
 		"password":"password"
