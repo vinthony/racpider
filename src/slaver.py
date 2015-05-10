@@ -7,8 +7,12 @@ STATUS_OK = 200
 config = getconfig()
 url = "http://"+config["server"]["host"]+":"+config["server"]["port"]
 
+# make sure
 def notempty():
-	e = requests.get(url+"/empty")
+	try:
+		e = requests.get(url+"/empty",timeout=1)
+	except requests.exceptions.Timeout:
+		return False
 	if e.status_code != STATUS_OK:
 		return False
 	if int(e.text) > 0 :
@@ -19,7 +23,6 @@ def slaver_client():
 	while notempty():
 		if int(config["sleep"]) > 0:
 			time.sleep(int(config["sleep"]))
-			
 		r = requests.get(url+"/pull")
 		if r.status_code != STATUS_OK:
 			print "error"

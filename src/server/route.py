@@ -45,13 +45,7 @@ def push():
 			if not bf.contains(x):
 				rq.enqueue(x)
 				bf.add(x)
-			else:
-				pass
-				# print "in bf"
-		else:
-			pass
-			# print "inlegal"			
-
+	return "1-ok"
 	
 @get('/empty')
 def empty():
