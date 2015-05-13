@@ -4,13 +4,18 @@
 
 核心思想如下：
 
-![racpider][http://vinthony.u.qiniudn.com/racpider.png]
+![racpider](http://vinthony.u.qiniudn.com/racpider.png)
 
 使用Redis来进行缓存队列，当有slaver发送pull请求时，redis出队列，分配一个url到slaver
-之后slaver进行爬虫工作，将数据采用mongodb存储在本地硬盘上，并且返回新的一轮url（此处使用requests包进行http发送请求）
+
+slaver进行爬虫工作，将数据采用mongodb存储在本地硬盘上，并且返回新的一轮url（此处使用requests包进行http发送请求）
+
 新的url将会push到服务器端，此时服务器端使用bloomfilter来进行重复url过滤，将不重复的url加入到redis队列中，重复此过程直至redis队列为空。
+
 后续分析时，从slaver中逐个读取mongodb中相应数据库的collection进行分析汇总。
+
 重写`src/analy/script.py`中的`filter`方法，将url符合提取要求的函数筛选出来
+
 重写`src/analy/script.py`中的`parse`方法，parse方法的函数参数为`body`,使用`bs4`等进行解析或者存储
 
 ## getting start
