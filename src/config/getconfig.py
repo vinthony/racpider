@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from redis import Redis
+#from redis import Redis
 import json,sys,os
 
 def mergejson(base,addition):
