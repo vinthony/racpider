@@ -5,7 +5,7 @@ import re
 _REP_IS_FORMAT_URL = "http"
 
 def html_filter(item):
-	if type(item)!= type(u"unicode"):
+	if not item:
 		return False
 	if item.startswith("http"):
 		return True

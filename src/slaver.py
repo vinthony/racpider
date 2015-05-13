@@ -16,6 +16,7 @@ def notempty():
 	if e.status_code != STATUS_OK:
 		return False
 	if int(e.text) > 0 :
+		print "remainer:"+e.text
 		return True
 	return False	
 
@@ -31,4 +32,5 @@ def slaver_client():
 		r2 = requests.get(url+"/push",headers=files)
 		if r2.status_code != STATUS_OK:
 			break
-
+if __name__ == "__main__":
+	slaver_client()
