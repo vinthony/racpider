@@ -1,38 +1,23 @@
 # racpider
-a spider framework base on python
+
 
 ## getting start
 
 ```shell
-./run.sh
+#服务器端
+./src/monitor.py
+
+#client端
+./src/slaver.py
 ```
 
-
-## feature
-
-* `Racpider.json` to config the project
-* easy to use
-* using python decorator and regexp to fetch the selected url
-* you can only config one file to fetch the website
-* spider commond line
-* you can use build-in html parse or beautiful soup or something else.
-* you can config the database if you have to
-* an interactor init process using `racpider init`
-* a command base on one file or base on the whole project
-* using `orm` to deal with the database (NoSQL or related-SQL) you don't need to 
-care about the low level of database engine.
-* using decorator `@api` to make return value a json
-* add some arguments to fetch data to a json file or xml file
-* have beautiful web client ,dragging to build returning api
-* using `racpider install` to update the necessary libraries which is defined in config  
-
 ## enhance
+
 - [ ] `cil`程序
 
 ## delay
 
 - [ ] 带cookies的爬虫(增加auth)
-- [ ] 多线程（delay 利用web服务器来进行分布式，故delay）
 
 ## todo
 
@@ -46,10 +31,8 @@ care about the low level of database engine.
 - [x] 增加分布式功能
 - [x] 数据库Queue配置(redis)
 - [x] mongodb 来存储内容
-- [ ] 获取超时
 
 ## bugs
-- [ ] racpider.json 无法输入正则 ？ 使用 py文件来代替具体配置到项目的内容
 - [x] filename too long 
 
 ## questions
@@ -67,7 +50,7 @@ care about the low level of database engine.
 - [x] url使用
 - [x] `GET server/pull` 向服务器请求一个job
 - [x] `GET server/push` 向服务器push一个结果
-- [ ] slaver超时处理 
+
 
 ## changelog
 
@@ -77,7 +60,92 @@ care about the low level of database engine.
 - fixed download为unicode类型导致无法getlink的问题
 - 增加mongodb支持存入数据
 
+#### 5月14日
+
+- 增加服务器端数据收集功能
+
 #### client dependence
 
+beautifulsoup4
 pymongo
 mongo
+
+## server dependence
+
+redis
+pymongo
+
+
+## 配置文件在`Racpider.json`中
+```json
+{
+	"seeds":["http://news.qq.com/"], //为要抓取的种子
+	"regexp":"qq.com", //抓取域名的匹配正则
+	"name":"qq_news", // 爬虫名称
+	"redis":{  //redis配置
+		"host":"127.0.0.1",
+		"port":"6379",
+		"db":"0"
+	},
+	"mongodb":{ //客户端mongodb配置
+		"host":"127.0.0.1",
+		"port":"20132",
+		"name":"racpider"
+		},
+	"server":{ // web服务器配置，用来实现分布式
+		"host":"192.168.31.110",
+		"port":"5237",
+		"debug":"False"
+	},
+	"auth":{ //【todo】认证
+		"username":"username",
+		"password":"password"
+	},
+	"timeout":"2",//超时时间
+	"sleep":"1", //每次抓取空当时间
+	"clients":[ //供master来进行分析
+		{
+			"host":"10.211.55.5",
+			"port":"20132"
+		},
+		{
+			"host":"10.211.55.7",
+			"port":"20132"
+		}
+	]
+}
+
+```
+
+
+## how to use
+
+重写`src/analy/script.py`中的`filter`方法，将url符合提取要求的函数筛选出来
+重写`src/analy/script.py`中的`parse`方法，parse方法的函数参数为`body`,使用`bs4`等进行解析或者存储
+
+
+
+## LISCENSE
+
+The MIT License (MIT)
+
+Copyright (c) 2015 Xiaodong Cun
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
