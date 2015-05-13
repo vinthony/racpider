@@ -76,3 +76,8 @@ care about the low level of database engine.
 - 增加cli入口
 - fixed download为unicode类型导致无法getlink的问题
 - 增加mongodb支持存入数据
+
+#### client dependence
+
+pymongo
+mongo

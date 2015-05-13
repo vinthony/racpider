@@ -15,7 +15,7 @@ class MyFileSystemEventHandler(FileSystemEventHandler):
 			log.info('Python source file changed:%s' % event.src_path)
 			self.restart()
 
-command = ['python','./src/server.py']
+command = ['python','server.py']
 process = None
 
 def kill_process():
@@ -38,7 +38,7 @@ def restart_process():
 
 def start_watch(path,callback):
 	observer = Observer()		
-	path = os.path.join(path,"src/server")
+	path = os.path.join(path,"server")
 	observer.schedule(MyFileSystemEventHandler(restart_process),path, recursive=True)	
 	observer.start()
 	log.info('Watching directory %s ' % path)
@@ -53,3 +53,6 @@ def start_watch(path,callback):
 def pymonitor():
 	path = os.path.abspath('.')
 	start_watch(path,None)	
+
+if __name__ == '__main__':
+	pymonitor()	

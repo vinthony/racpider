@@ -1461,8 +1461,8 @@ class WSGIApplication(object):
             port = int(config["port"])
             debug = False
 
-        #colorlog.info('application (%s) will start at %s:%s...' % (self._document_root, host, port))
-        server = make_server(host, port, self.get_wsgi_application(debug=False))
+        print 'application (%s) will start at %s:%s...' % (self._document_root, host, port)
+        server = make_server(host, port, self.get_wsgi_application(debug=True))
         server.serve_forever()
 
     def get_wsgi_application(self, debug=False):
