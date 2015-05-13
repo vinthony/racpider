@@ -11,5 +11,16 @@
 	"stop":{
 		"time":"0",
 		"pages":"10000"
-	}
+	},
+	"clients":[
+		{
+			"ip":"",
+			"port":"port"
+		}
+		{
+			"ip":"",
+			"port":"port"
+		}
+	]
+
 }
