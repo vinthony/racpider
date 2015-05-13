@@ -11,4 +11,4 @@ class HTMLModel(object):
 		return self.collection
 
 if __name__ == '__main__':
-	print HTMLModel(name="2",age="3").format()			
+	print HTMLModel(name="2",age="3").format()["name"]			
