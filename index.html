@@ -22,12 +22,189 @@
       <h1>
 <a id="racpider" class="anchor" href="#racpider" aria-hidden="true"><span class="octicon octicon-link"></span></a>racpider</h1>
 
-<p>a spider framework base on python</p>
+<h2>
+<a id="getting-start" class="anchor" href="#getting-start" aria-hidden="true"><span class="octicon octicon-link"></span></a>getting start</h2>
+
+<div class="highlight highlight-shell"><pre><span class="pl-c">#服务器端</span>
+./src/monitor.py
+
+<span class="pl-c">#client端</span>
+./src/slaver.py</pre></div>
 
 <h2>
-<a id="feature" class="anchor" href="#feature" aria-hidden="true"><span class="octicon octicon-link"></span></a>feature</h2>
+<a id="enhance" class="anchor" href="#enhance" aria-hidden="true"><span class="octicon octicon-link"></span></a>enhance</h2>
 
-<p>coming soon</p>
+<ul>
+<li>[ ] <code>cil</code>程序</li>
+</ul>
+
+<h2>
+<a id="delay" class="anchor" href="#delay" aria-hidden="true"><span class="octicon octicon-link"></span></a>delay</h2>
+
+<ul>
+<li>[ ] 带cookies的爬虫(增加auth)</li>
+</ul>
+
+<h2>
+<a id="todo" class="anchor" href="#todo" aria-hidden="true"><span class="octicon octicon-link"></span></a>todo</h2>
+
+<ul>
+<li>[x] 去掉url的hash</li>
+<li>[x] 增强filter功能，修复match为search</li>
+<li>[x] 将error信息放入error.log中</li>
+<li>[x] 增加<code>racpider.json</code>来配置</li>
+<li>[x] 增加默认racpider</li>
+<li>[x] 爬虫网页命名</li>
+<li>[x] 多重结束条件，时间/层次</li>
+<li>[x] 增加分布式功能</li>
+<li>[x] 数据库Queue配置(redis)</li>
+<li>[x] mongodb 来存储内容</li>
+</ul>
+
+<h2>
+<a id="bugs" class="anchor" href="#bugs" aria-hidden="true"><span class="octicon octicon-link"></span></a>bugs</h2>
+
+<ul>
+<li>[x] filename too long </li>
+</ul>
+
+<h2>
+<a id="questions" class="anchor" href="#questions" aria-hidden="true"><span class="octicon octicon-link"></span></a>questions</h2>
+
+<ul>
+<li>[x] 如何高效的存储抓下来的网页的名称? 【使用mongodb存储】</li>
+<li>[x] 分布式生成的html是存在当个集群的db下？如果不这样，返回整个html和正常的过程一致</li>
+</ul>
+
+<h2>
+<a id="server" class="anchor" href="#server" aria-hidden="true"><span class="octicon octicon-link"></span></a>Server</h2>
+
+<ul>
+<li>[x] 配置redis 分配seed url 到slave</li>
+<li>[x] bloom filter 用来过滤已经fetch过得url</li>
+<li>[ ] 分配url策略</li>
+</ul>
+
+<h2>
+<a id="slave" class="anchor" href="#slave" aria-hidden="true"><span class="octicon octicon-link"></span></a>slave</h2>
+
+<ul>
+<li>[x] 从url接收job</li>
+<li>[x] 存储网页内容</li>
+<li>[x] url使用</li>
+<li>[x] <code>GET server/pull</code> 向服务器请求一个job</li>
+<li>[x] <code>GET server/push</code> 向服务器push一个结果</li>
+</ul>
+
+<h2>
+<a id="changelog" class="anchor" href="#changelog" aria-hidden="true"><span class="octicon octicon-link"></span></a>changelog</h2>
+
+<h4>
+<a id="5月9日" class="anchor" href="#5%E6%9C%889%E6%97%A5" aria-hidden="true"><span class="octicon octicon-link"></span></a>5月9日</h4>
+
+<ul>
+<li>增加cli入口</li>
+<li>fixed download为unicode类型导致无法getlink的问题</li>
+<li>增加mongodb支持存入数据</li>
+</ul>
+
+<h4>
+<a id="5月14日" class="anchor" href="#5%E6%9C%8814%E6%97%A5" aria-hidden="true"><span class="octicon octicon-link"></span></a>5月14日</h4>
+
+<ul>
+<li>增加服务器端数据收集功能</li>
+</ul>
+
+<h4>
+<a id="client-dependence" class="anchor" href="#client-dependence" aria-hidden="true"><span class="octicon octicon-link"></span></a>client dependence</h4>
+
+<ul>
+<li>beautifulsoup4</li>
+<li>pymongo</li>
+<li>mongo</li>
+</ul>
+
+<h2>
+<a id="server-dependence" class="anchor" href="#server-dependence" aria-hidden="true"><span class="octicon octicon-link"></span></a>server dependence</h2>
+
+<ul>
+<li>redis</li>
+<li>pymongo</li>
+</ul>
+
+<h2>
+<a id="配置文件在racpiderjson中" class="anchor" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%9C%A8racpiderjson%E4%B8%AD" aria-hidden="true"><span class="octicon octicon-link"></span></a>配置文件在<code>Racpider.json</code>中</h2>
+
+<div class="highlight highlight-js"><pre>{
+    <span class="pl-s"><span class="pl-pds">"</span>seeds<span class="pl-pds">"</span></span><span class="pl-k">:</span>[<span class="pl-s"><span class="pl-pds">"</span>http://news.qq.com/<span class="pl-pds">"</span></span>], <span class="pl-c">//为要抓取的种子</span>
+    <span class="pl-s"><span class="pl-pds">"</span>regexp<span class="pl-pds">"</span></span><span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span>qq.com<span class="pl-pds">"</span></span>, <span class="pl-c">//抓取域名的匹配正则</span>
+    <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span><span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span>qq_news<span class="pl-pds">"</span></span>, <span class="pl-c">// 爬虫名称</span>
+    <span class="pl-s"><span class="pl-pds">"</span>redis<span class="pl-pds">"</span></span><span class="pl-k">:</span>{  <span class="pl-c">//redis配置</span>
+        <span class="pl-s"><span class="pl-pds">"</span>host<span class="pl-pds">"</span></span><span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span>127.0.0.1<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>port<span class="pl-pds">"</span></span><span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span>6379<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>db<span class="pl-pds">"</span></span><span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>
+    },
+    <span class="pl-s"><span class="pl-pds">"</span>mongodb<span class="pl-pds">"</span></span><span class="pl-k">:</span>{ <span class="pl-c">//客户端mongodb配置</span>
+        <span class="pl-s"><span class="pl-pds">"</span>host<span class="pl-pds">"</span></span><span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span>127.0.0.1<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>port<span class="pl-pds">"</span></span><span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span>20132<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span><span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span>racpider<span class="pl-pds">"</span></span>
+        },
+    <span class="pl-s"><span class="pl-pds">"</span>server<span class="pl-pds">"</span></span><span class="pl-k">:</span>{ <span class="pl-c">// web服务器配置，用来实现分布式</span>
+        <span class="pl-s"><span class="pl-pds">"</span>host<span class="pl-pds">"</span></span><span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span>192.168.31.110<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>port<span class="pl-pds">"</span></span><span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span>5237<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>debug<span class="pl-pds">"</span></span><span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span>False<span class="pl-pds">"</span></span>
+    },
+    <span class="pl-s"><span class="pl-pds">"</span>auth<span class="pl-pds">"</span></span><span class="pl-k">:</span>{ <span class="pl-c">//【todo】认证</span>
+        <span class="pl-s"><span class="pl-pds">"</span>username<span class="pl-pds">"</span></span><span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span>username<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>password<span class="pl-pds">"</span></span><span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span>password<span class="pl-pds">"</span></span>
+    },
+    <span class="pl-s"><span class="pl-pds">"</span>timeout<span class="pl-pds">"</span></span><span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span>2<span class="pl-pds">"</span></span>,<span class="pl-c">//超时时间</span>
+    <span class="pl-s"><span class="pl-pds">"</span>sleep<span class="pl-pds">"</span></span><span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>, <span class="pl-c">//每次抓取空当时间</span>
+    <span class="pl-s"><span class="pl-pds">"</span>clients<span class="pl-pds">"</span></span><span class="pl-k">:</span>[ <span class="pl-c">//供master来进行分析</span>
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>host<span class="pl-pds">"</span></span><span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span>10.211.55.5<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>port<span class="pl-pds">"</span></span><span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span>20132<span class="pl-pds">"</span></span>
+        },
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>host<span class="pl-pds">"</span></span><span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span>10.211.55.7<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>port<span class="pl-pds">"</span></span><span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span>20132<span class="pl-pds">"</span></span>
+        }
+    ]
+}
+</pre></div>
+
+<h2>
+<a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span class="octicon octicon-link"></span></a>how to use</h2>
+
+<ul>
+<li>重写<code>src/analy/script.py</code>中的<code>filter</code>方法，将url符合提取要求的函数筛选出来</li>
+<li>重写<code>src/analy/script.py</code>中的<code>parse</code>方法，parse方法的函数参数为<code>body</code>,使用<code>bs4</code>等进行解析或者存储</li>
+</ul>
+
+<h2>
+<a id="liscense" class="anchor" href="#liscense" aria-hidden="true"><span class="octicon octicon-link"></span></a>LISCENSE</h2>
+
+<p>The MIT License (MIT)</p>
+
+<p>Copyright (c) 2015 Xiaodong Cun</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/vinthony/racpider">Racpider</a> is maintained by <a href="https://github.com/vinthony">vinthony</a>.</span>
