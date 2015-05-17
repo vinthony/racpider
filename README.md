@@ -54,7 +54,9 @@
 ## Server
 - [x] 配置redis 分配seed url 到slave
 - [x] bloom filter 用来过滤已经fetch过得url
-- [ ] 分配url策略
+- [ ] 增加robot.txt过滤信息
+- [ ] 分配url策略(一致性hash)
+- [ ] 采用json来传输数据
 
 ## slave
 - [x] 从url接收job
