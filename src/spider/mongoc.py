@@ -12,3 +12,6 @@ class MongoC(object):
 	def insert(self,obj):
 		if self.collection.find({"url":obj.format()["url"]}).count() == 0:
 			self.collection.insert_one(obj.format())	
+
+	def count(self):
+		return self.collection.count()		

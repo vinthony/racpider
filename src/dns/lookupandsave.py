@@ -1,9 +1,7 @@
 from redistool import rclient
 from urlprase import urlprase
 import socket
-
-def saveaddr(url,father=None):
-	rc = rclient()
+def geturldict(url):
 	o = urlprase(url)
 	host = o.netloc
 	ip = socket.gethostbyname(o.netloc)
@@ -14,7 +12,11 @@ def saveaddr(url,father=None):
 		depth = rc.get(father).depth +1
 	else:		
 		depth = 1
-	rc.set(url,dict(host=host,ip=ip,port=port,search=search,priority=priority,depth=depth))	
+	return dict(host=host,ip=ip,port=port,search=search,priority=priority,depth=depth)
+
+def saveaddr(url,father=None):
+	rc = rclient()
+	rc.set(url,geturldict(url))	
 	return True
 
 def choosenode(url):

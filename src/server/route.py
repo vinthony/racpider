@@ -25,6 +25,7 @@ def index():
 
 @get('/pull')
 def pull():
+	## pull 通过header得知状态，然后分配
 	if not rq.empty():
 		u = rq.dequeue()
 		bf.add(u)
