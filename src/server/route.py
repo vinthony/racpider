@@ -3,7 +3,7 @@ from web import get,post,ctx,interceptor,seeother,notfound,found,Dict
 from redisQueue import RedisQueue
 from bloomfilter import BloomFilter
 from redis import Redis
-import sys,os
+import sys,os,json
 from config.getconfig import getconfig
 from utils import log
 from urllib import unquote
@@ -30,8 +30,9 @@ def pull():
 	## pull 通过header得知状态，然后分配
 	if not rq.empty():
 		u = rq.dequeue()
+		us = "http://"+u['host']+u['search']
 		bf.add(u)
-		log.info(unquote(u),key="FETCH")
+		log.info(unquote(us),key="FETCH")
 		return u
 	else:
 		return seeother("/error")	
@@ -42,11 +43,11 @@ def error():
 	
 @get('/push')
 def push():
-	urls = ctx.request.header('file').split(",")
+	urls = json.loads(ctx.request.header('file'))
 	for x in urls:
 		if legal(x):
 			if not bf.contains(x):
-				rq.enqueue(x)
+				rq.enqueue(geturldict(x))
 				bf.add(x)
 	return "1-ok"
 	

@@ -4,7 +4,7 @@ import socket
 def thisclient(url):
 	c = getconfig()
 	u = urlparse(url)
-	ip = socket.gethostbyname(o.netloc)
+	ip = socket.gethostbyname(u.netloc)
 	if ip.endswith("1"):
 		return True
 	else:

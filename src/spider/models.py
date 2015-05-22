@@ -63,4 +63,4 @@ class URL(Dict):
 		
 if __name__ == '__main__':
 	print HTMLModel(name="2",age="3").format()["name"]			
-	print URL(priority=100).priority
+	print URL(dict(priority=100,w=12))

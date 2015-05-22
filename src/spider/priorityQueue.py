@@ -8,14 +8,12 @@ class priorityQueue(object):
 		self.q = []
 
 	def addtoQueue(self,obj):
-		print obj['depth']
-		heappush(self.q,URL(obj))
+		heappush(self.q,URL(search=obj['search'],ip=obj['ip'],host=obj['host'],priority=obj['priority'],depth=obj['depth'],port=obj['port']))
 
 	def deQueueURL(self):
 		obj = heappop(self.q)
-		log.info(obj)
-		return obj
+		return "http://"+obj['host']+obj['search']
 	def addURLtoQueue(self,url):
-		self.addtoQueue(URL(geturldict(url)))
+		self.addtoQueue(geturldict(url))
 	def count(self):
 		return len(self.q)

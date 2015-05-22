@@ -1,18 +1,18 @@
 from redistool import rclient
 from urlparse import urlparse
-import socket
+import socket,json
 def geturldict(url,father=None):
 	o = urlparse(url)
 	host = o.netloc
 	ip = socket.gethostbyname(o.netloc)
-	port = o.port
+	port = o.port or 80
 	search = o.path
 	priority = getpriority(url)
 	if father:
 		depth = rc.get(father).depth +1
 	else:		
 		depth = 1
-	return dict(host=host,ip=ip,port=port,search=search,priority=priority,depth=depth)
+	return json.dumps(dict(host=host,ip=ip,port=port,search=search,priority=priority,depth=depth))
 
 def saveaddr(url,father=None):
 	rc = rclient()

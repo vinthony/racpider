@@ -39,10 +39,10 @@ def slaver_client():
 		r = requests.get(url+"/pull")
 		if r.status_code != STATUS_OK:
 			print "error"
-		v.addtoQueue(json.dumps(r.text))
+		v.addtoQueue(json.loads(r.text))
 		links = getlinks(v.deQueueURL())
 		for x in filter(thisclient,links):
-			v.addURLtoQueue(x,r.text)
+			v.addURLtoQueue(x)
 		l = filter(notinthisclient,links)
 		files = {'file':",".join(l)}
 		r2 = requests.get(url+"/push",headers=files)
