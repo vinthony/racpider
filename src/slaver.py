@@ -25,8 +25,8 @@ def notempty():
 	if e.status_code != STATUS_OK:
 		print e.status_code
 		return False
-	if int(e.text) > 0 :
-		print "remainer:"+e.text
+	if int(e.text) > 0 or v.count() > 0 :
+		print "remainer:"+e.text+",client_count:"+str(v.count())
 		return True
 	return False	
 
@@ -44,7 +44,7 @@ def slaver_client():
 		for x in filter(thisclient,links):
 			v.addURLtoQueue(x)
 		l = filter(notinthisclient,links)
-		files = {'file':",".join(l)}
+		files = {'file':json.dumps(l)}
 		r2 = requests.get(url+"/push",headers=files)
 		if r2.status_code != STATUS_OK:
 			break

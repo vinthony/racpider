@@ -12,7 +12,7 @@ def geturldict(url,father=None):
 		depth = rc.get(father).depth +1
 	else:		
 		depth = 1
-	return json.dumps(dict(host=host,ip=ip,port=port,search=search,priority=priority,depth=depth))
+	return dict(host=host,ip=ip,port=port,search=search,priority=priority,depth=depth)
 
 def saveaddr(url,father=None):
 	rc = rclient()

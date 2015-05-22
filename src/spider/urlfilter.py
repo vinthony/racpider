@@ -1,11 +1,12 @@
 from urlparse import urlparse
 from config.getconfig import getconfig
 import socket
+import random
 def thisclient(url):
 	c = getconfig()
 	u = urlparse(url)
 	ip = socket.gethostbyname(u.netloc)
-	if ip.endswith("1"):
+	if random.random() > 0.5:
 		return True
 	else:
 		return False

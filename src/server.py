@@ -1,6 +1,6 @@
 #!/usr/bin/env python 
 # -*- coding:utf8 -*-
-import os
+import os,json
 from server import route
 from redis import Redis
 from server.web import WSGIApplication
@@ -16,7 +16,7 @@ r = RedisQueue(config["name"],redis_conn)
 
 if r.empty():
 	for x in config["seeds"]:
-		r.enqueue(geturldict(x))
+		r.enqueue(json.dumps(geturldict(x)))
 
 wsgi = WSGIApplication(os.path.dirname(os.path.abspath(__file__)))
 wsgi.add_module(route)
