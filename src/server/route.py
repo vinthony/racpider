@@ -1,3 +1,4 @@
+# coding:utf-8
 from web import get,post,ctx,interceptor,seeother,notfound,found,Dict
 from redisQueue import RedisQueue
 from bloomfilter import BloomFilter
@@ -6,6 +7,7 @@ import sys,os
 from config.getconfig import getconfig
 from utils import log
 from urllib import unquote
+from redistool.clientinfo import reflashState
 import time
 import re
 config = getconfig()
@@ -50,4 +52,8 @@ def push():
 	
 @get('/empty')
 def empty():
+	client = ctx.request.header('clinet')
+	count = ctx.request.header('count')
+	network = ctx.request.header('network')
+	reflashState(client,count=count,network=network)
 	return str(rq.qsize())

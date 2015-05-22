@@ -6,6 +6,7 @@ from redis import Redis
 from server.web import WSGIApplication
 from server.redisQueue import RedisQueue
 from config.getconfig import getconfig
+from dns.lookupandsave import geturldict
 # - config the redis
 config = getconfig()
 rc = config["redis"]
@@ -15,7 +16,7 @@ r = RedisQueue(config["name"],redis_conn)
 
 if r.empty():
 	for x in config["seeds"]:
-		r.enqueue(x)
+		r.enqueue(geturldict(x))
 
 wsgi = WSGIApplication(os.path.dirname(os.path.abspath(__file__)))
 wsgi.add_module(route)

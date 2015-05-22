@@ -1,8 +1,8 @@
 from redistool import rclient
-from urlprase import urlprase
+from urlparse import urlparse
 import socket
-def geturldict(url):
-	o = urlprase(url)
+def geturldict(url,father=None):
+	o = urlparse(url)
 	host = o.netloc
 	ip = socket.gethostbyname(o.netloc)
 	port = o.port
@@ -29,7 +29,7 @@ def choosenode(url):
     	return "node2"	
 
 def getpriority(url):
-	pro = 1000 - len(urlprase(url).host) - len(urlprase(url).path)
+	pro = 1000 - len(urlparse(url).netloc) - len(urlparse(url).path)
 	if url.endswith('.html'):
 		pro += 2
 	if any(s in url for s in ("main","key","page","com","article")):

@@ -1,27 +1,29 @@
 #!/usr/bin/env python
+# coding:utf-8
 import requests
 import sys,time
-import socket
+import socket,json
 from spider.geturlsfromlink import getlinks 
 from spider.mongoc import MongoC
 from spider.urlfilter import thisclient,notinthisclient
-from spider.priorityQueue import addtoQueue,deQueueURL
+from spider.priorityQueue import priorityQueue
 from config.getconfig import getconfig
 STATUS_OK = 200
 config = getconfig()
 url = "http://"+config["server"]["host"]+":"+config["server"]["port"]
-q = []
+v = priorityQueue()
 regexps  = {}
 def getidentify():
 	return socket.gethostname()
 # make sure
 def notempty():
 	try:
-		data = {"client":getidentify(),"count":MongoC().count(),"network":}
+		data = {"client":getidentify(),"count":MongoC().count(),"network":v.count()}
 		e = requests.get(url+"/empty",headers=data,timeout=1)
 	except requests.exceptions.Timeout:
 		return False
 	if e.status_code != STATUS_OK:
+		print e.status_code
 		return False
 	if int(e.text) > 0 :
 		print "remainer:"+e.text
@@ -31,15 +33,16 @@ def notempty():
 ## 客户端一直进行检验，并且发送客户端的状态到服务器。
 def slaver_client():
 	while notempty():
+		global h
 		if int(config["sleep"]) > 0: ##礼貌策略
 			time.sleep(int(config["sleep"]))
 		r = requests.get(url+"/pull")
 		if r.status_code != STATUS_OK:
 			print "error"
-		addtoQueue(h,obj=json.dumps(r.text))
-		links = getlinks(deQueueURL(h))
+		v.addtoQueue(json.dumps(r.text))
+		links = getlinks(v.deQueueURL())
 		for x in filter(thisclient,links):
-			addtoQueue(h,x,r.text)
+			v.addURLtoQueue(x,r.text)
 		l = filter(notinthisclient,links)
 		files = {'file':",".join(l)}
 		r2 = requests.get(url+"/push",headers=files)

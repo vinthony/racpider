@@ -9,7 +9,7 @@
 	},
 	"mongodb":{
 		"host":"127.0.0.1",
-		"port":"20132",
+		"port":"27017",
 		"name":"racpider"
 		},
 	"server":{

@@ -1,13 +1,21 @@
 from spider.models import URL
-from urlpraser import urlpraser
+from urlparse import urlparse
 from dns.lookupandsave import geturldict
-import heapq
-def addtoQueue(queue,url,father,obj=None):
-	if obj:
-		heappush(queue,URL(obj))
-	else:
-		heappush(queue,URL(geturldict(url),father))
+from heapq import heappush,heappop
+from utils import log
+class priorityQueue(object):
+	def __init__(self):
+		self.q = []
 
-def deQueue(queue):
-	obj = heappop(queue)		
-	return obj.host+obj.search
+	def addtoQueue(self,obj):
+		print obj['depth']
+		heappush(self.q,URL(obj))
+
+	def deQueueURL(self):
+		obj = heappop(self.q)
+		log.info(obj)
+		return obj
+	def addURLtoQueue(self,url):
+		self.addtoQueue(URL(geturldict(url)))
+	def count(self):
+		return len(self.q)

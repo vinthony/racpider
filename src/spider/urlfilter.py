@@ -1,9 +1,9 @@
-from urlprase import urlprase
+from urlparse import urlparse
 from config.getconfig import getconfig
 import socket
 def thisclient(url):
 	c = getconfig()
-	u = urlprase(url)
+	u = urlparse(url)
 	ip = socket.gethostbyname(o.netloc)
 	if ip.endswith("1"):
 		return True
