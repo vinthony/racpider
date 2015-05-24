@@ -5,7 +5,10 @@ import random
 def thisclient(url):
 	c = getconfig()
 	u = urlparse(url)
-	ip = socket.gethostbyname(u.netloc)
+	try:
+		ip = socket.gethostbyname(u.netloc)
+	except Exception, e:
+		ip = "0.0.0.0"
 	if random.random() > 0.5:
 		return True
 	else:

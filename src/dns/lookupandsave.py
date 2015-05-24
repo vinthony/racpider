@@ -4,7 +4,10 @@ import socket,json
 def geturldict(url,father=None):
 	o = urlparse(url)
 	host = o.netloc
-	ip = socket.gethostbyname(o.netloc)
+	try:
+		ip = socket.gethostbyname(o.netloc)	
+	except Exception, e:
+		ip = "0.0.0.0"
 	port = o.port or 80
 	search = o.path
 	priority = getpriority(url)

@@ -20,9 +20,9 @@ class Downloader(object):
 	def get(self):
 		try:
 			r = requests.get(self.url,timeout=int(config["timeout"]))
-			if r.status_code != NetworkStatus.OK:
-				log.warning("error:"+str(r.status_code)+":"+str(self.url))
 			log.info(self.url,key="FETCH")
+			if r.status_code != NetworkStatus.OK:
+				log.warning("error:"+str(r.status_code)+":"+str(self.url.decode('utf-8')))
 			if self.savedb(self.url,r.text):
 				return r.text
 			else:

@@ -33,16 +33,18 @@ def notempty():
 ## 客户端一直进行检验，并且发送客户端的状态到服务器。
 def slaver_client():
 	while notempty():
-		global h
 		if int(config["sleep"]) > 0: ##礼貌策略
 			time.sleep(int(config["sleep"]))
-		r = requests.get(url+"/pull")
-		if r.status_code != STATUS_OK:
-			print "error"
-		v.addtoQueue(json.loads(r.text))
+		if v.count() < 500:
+			r = requests.get(url+"/pull")
+			if r.status_code != STATUS_OK:
+				print "error"
+			v.addtoQueue(json.loads(r.text))
+		else:
+			pass	
 		links = getlinks(v.deQueueURL())
 		for x in filter(thisclient,links):
-			v.addURLtoQueue(x)
+				v.addURLtoQueue(x)
 		l = filter(notinthisclient,links)
 		files = {'file':json.dumps(l)}
 		r2 = requests.get(url+"/push",headers=files)
