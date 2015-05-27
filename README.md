@@ -35,6 +35,8 @@ slaver进行爬虫工作，将数据采用mongodb存储在本地硬盘上，并�
 ## delay
 
 - [ ] 带cookies的爬虫(增加auth)
+- [ ] 友好的web界面监控各个服务器信息
+- [ ] 更加稳定的爬虫过程
 
 ## todo
 
@@ -49,6 +51,7 @@ slaver进行爬虫工作，将数据采用mongodb存储在本地硬盘上，并�
 - [x] 数据库Queue配置(redis)
 - [x] mongodb 来存储内容
 
+
 ## bugs
 - [x] filename too long 
 
@@ -61,7 +64,7 @@ slaver进行爬虫工作，将数据采用mongodb存储在本地硬盘上，并�
 - [x] bloom filter 用来过滤已经fetch过得url
 - [ ] 增加robot.txt过滤信息
 - [ ] 分配url策略(一致性hash)
-- [ ] 采用json来传输数据
+- [x] 采用json来传输数据
 
 ## slave
 - [x] 从url接收job
@@ -94,6 +97,11 @@ slaver进行爬虫工作，将数据采用mongodb存储在本地硬盘上，并�
 * request
 * redis
 * pymongo
+
+#### 5月24日
+
+* 使用JSON来进行传输
+* 客户端增加优先级队列
 
 
 ## 配置文件在`Racpider.json`中
