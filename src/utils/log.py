@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import time
 import io,os,sys
-sys.path.append("/Users/nantu/projects/racpider/src/")
 from config import getconfig
 
 class bcolors:
@@ -29,8 +28,8 @@ def info(s,key='INFO'):
 def warning(s,key='WARNING'):		
 	if level_ == WARNING or level_ == 0:
 		print '[%s %s %s][%s %s %s]%s %s %s' % (bcolors.FAIL,key,bcolors.ENDC,bcolors.HEADER,time.strftime('%H:%M'),bcolors.ENDC,bcolors.FAIL,s,bcolors.ENDC)
-		with open("/Users/nantu/projects/racpider/error.log","a") as f:
-			f.write(time.strftime('[%y/%m/%d %H:%M] ')+s+os.linesep)
+		#with open("/Users/nantu/projects/racpider/error.log","a") as f:
+		#	f.write(time.strftime('[%y/%m/%d %H:%M] ')+s+os.linesep)
 def color(s):
 	print '%s %s %s' % (bcolors.OKGREEN,s,bcolors.ENDC)
 
